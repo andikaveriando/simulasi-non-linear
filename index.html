@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulator Sistem Non-Linier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Fraunces:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <p class="course">Mini Riset Pemodelan dan Simulasi</p>
+    <h1>Simulator Sistem Non-Linier</h1>
+    <p class="sub">Pilih salah satu dari 5 soal, atau tulis sistem sendiri. Program mencari titik kesetimbangan dengan metode Newton-Raphson, lalu menghitung Jacobian, nilai eigen, dan jenis kestabilannya.</p>
+  </header>
+
+  <div id="tabs" role="group" aria-label="Pilih soal"></div>
+  <section class="info" id="info"></section>
+
+  <section class="panel">
+    <div class="grid">
+      <label>Jenis sistem
+        <select id="dim">
+          <option value="1">1 dimensi: x′ = f(x)</option>
+          <option value="2">2 dimensi: x′ = f(x,y), y′ = g(x,y)</option>
+        </select>
+      </label>
+      <label><span id="lf">f(x,y)</span>
+        <input type="text" id="fx" spellcheck="false" autocomplete="off">
+      </label>
+      <label id="lg"><span>g(x,y)</span>
+        <input type="text" id="gy" spellcheck="false" autocomplete="off">
+      </label>
+    </div>
+
+    <div id="params" class="grid"></div>
+
+    <div class="dom">
+      <label>x min<input type="number" id="x0" step="any"></label>
+      <label>x maks<input type="number" id="x1" step="any"></label>
+      <label class="d2">y min<input type="number" id="y0" step="any"></label>
+      <label class="d2">y maks<input type="number" id="y1" step="any"></label>
+    </div>
+
+    <p id="err" role="alert"></p>
+    <p class="note">Rentang x dan y adalah daerah pencarian titik kesetimbangan. Tulis pangkat dengan ^, dan gunakan sin, cos, exp, sqrt, pi. Untuk bilangan negatif berpangkat, beri kurung, misalnya -(x^2).</p>
+  </section>
+
+  <div id="res"></div>
+
+  <section class="card guide">
+    <b>Cara membaca hasil (sistem 2 dimensi)</b>
+    <p class="note">Hitung trace (tr) dan determinan (det) dari Jacobian di setiap titik.<br>
+    det &lt; 0: saddle (tidak stabil).<br>
+    det &gt; 0 dan tr² − 4·det ≥ 0: node. Stabil (sink) jika tr &lt; 0, tidak stabil (source) jika tr &gt; 0.<br>
+    det &gt; 0 dan tr² − 4·det &lt; 0: spiral. Stabil jika tr &lt; 0, tidak stabil jika tr &gt; 0.<br>
+    det = 0 atau tr = 0 dengan eigenvalue imajiner: linearisasi tidak cukup untuk menyimpulkan kestabilan.</p>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
